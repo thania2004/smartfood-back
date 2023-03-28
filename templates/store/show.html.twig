@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Store{% endblock %}
+
+{% block body %}
+    <h1>Store</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ store.id }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ store.address }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ store.phone }}</td>
+            </tr>
+            <tr>
+                <th>Instagram</th>
+                <td>{{ store.instagram }}</td>
+            </tr>
+            <tr>
+                <th>Facebook</th>
+                <td>{{ store.facebook }}</td>
+            </tr>
+            <tr>
+                <th>Youtube</th>
+                <td>{{ store.youtube }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_store_index') }}">back to list</a>
+
+    <a href="{{ path('app_store_edit', {'id': store.id}) }}">edit</a>
+
+    {{ include('store/_delete_form.html.twig') }}
+{% endblock %}
