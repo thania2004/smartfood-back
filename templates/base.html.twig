@@ -2,18 +2,260 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Smartfood{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <title>{% block title %}{% endblock %} | SmartFood</title>
+        <link rel="icon" href={{ asset('assets/images/favicon.png') }}>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link href={{ asset('assets/css/main.css') }} rel="stylesheet" />
+        
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('ckeditor') }}
         {% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('ckeditor') }}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <!--Main Navigation-->
+        <header>
+        <!-- Sidebar -->
+        <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                    <!-- Collapse 1 -->
+                    <a class="nav-link list-group-item list-group-item-action py-2 ripple" aria-current="true"
+                    data-mdb-toggle="collapse" href="#collapseClientes" aria-expanded="true"
+                    aria-controls="collapseClientes">
+                        <i class="fa-solid fa-users me-3"></i><span>Clientes</span>
+                    </a>
+                    <!-- Collapsed content -->
+                    <ul id="collapseClientes" class="collapse list-group list-group-flush">
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_clients_index') }} class="text-reset">Listado</a>
+                        </li>
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_clients_new') }} class="text-reset">Agregar nuevo</a>
+                        </li>
+                    </ul>
+                    <!-- Collapse 1 -->
+
+                    <!-- Collapse 2 -->
+                    <a class="nav-link list-group-item list-group-item-action py-2 ripple" aria-current="true"
+                    data-mdb-toggle="collapse" href="#collapsePedidos" aria-expanded="true"
+                    aria-controls="collapsePedidos">
+                        <i class="fa-solid fa-cart-arrow-down me-3"></i><span>Pedidos</span>
+                    </a>
+                    <!-- Collapsed content -->
+                    <ul id="collapsePedidos" class="collapse list-group list-group-flush">
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_orders_index') }} class="text-reset">Listado</a>
+                        </li>
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_orders_new') }} class="text-reset">Agregar nuevo</a>
+                        </li>
+                    </ul>
+                    <!-- Collapse 2 -->
+                    <!-- Collapse 3 -->
+                    <a class="nav-link list-group-item list-group-item-action py-2 ripple" aria-current="true"
+                    data-mdb-toggle="collapse" href="#collapseProductos" aria-expanded="true"
+                    aria-controls="collapseProductos">
+                        <i class="fa-solid fa-basket-shopping me-3"></i><span>Productos</span>
+                    </a>
+                    <!-- Collapsed content -->
+                    <ul id="collapseProductos" class="collapse list-group list-group-flush">
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_products_index') }} class="text-reset">Listado</a>
+                        </li>
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_products_new') }} class="text-reset">Agregar nuevo</a>
+                        </li>
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_categories_index') }} class="text-reset">Categorias</a>
+                        </li>
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_presentation_index') }} class="text-reset">Presentación</a>
+                        </li>
+                    </ul>
+                    <!-- Collapse 3 -->
+                    
+                    <!-- Collapse 4 -->
+                    <a class="nav-link list-group-item list-group-item-action py-2 ripple" aria-current="true"
+                    data-mdb-toggle="collapse" href="#collapseTienda" aria-expanded="true"
+                    aria-controls="collapseTienda">
+                        <i class="fa-solid fa-shop me-3"></i><span>Tienda</span>
+                    </a>
+                    <!-- Collapsed content -->
+                    <ul id="collapseTienda" class="collapse list-group list-group-flush">
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_terms_index') }} class="text-reset">Términos y Condiciones</a>
+                        </li>
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_privacy_index') }} class="text-reset">Políticas de Privacidad</a>
+                        </li>
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_faqs_index') }} class="text-reset">Preguntas Frecuentes</a>
+                        </li>
+                        <li class="list-group-item py-1">
+                            <a href={{ path('app_store_index') }} class="text-reset">Info de Contacto</a>
+                        </li>
+                    </ul>
+                    <!-- Collapse 4 -->
+                    <!-- Collapse 5 -->
+                    <a class="nav-link list-group-item list-group-item-action py-2 ripple" aria-current="true"
+                    data-mdb-toggle="collapse" href="#collapseConfig" aria-expanded="true"
+                    aria-controls="collapseConfig">
+                        <i class="fa-solid fa-hammer me-3"></i><span>Configuración</span>
+                    </a>
+                    <!-- Collapsed content -->
+                    <ul id="collapseConfig" class="collapse list-group list-group-flush">
+                        <li class="list-group-item py-1">
+                            <a href="" class="text-reset">Usuarios</a>
+                        </li>
+                        <li class="list-group-item py-1">
+                            <a href="" class="text-reset">Roles</a>
+                        </li>
+                    </ul>
+                    <!-- Collapse 5 -->
+                    <!-- Collapse 6 -->
+                    <!-- Collapsed content -->
+                    <ul id="collapseCerrar" class="collapse show list-group list-group-flush">
+                        <li class="list-group-item py-1">
+                            <a href="" class="text-reset">
+                                <i class="fa-solid fa-right-from-bracket me-3"></i><span>Cerrar Sesión</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Collapse 6 -->
+                </div>
+            </div>
+        </nav>
+        <!-- Sidebar -->
+
+        <!-- Navbar -->
+        <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#sidebarMenu"
+                aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">
+                <img src={{ asset('assets/images/logo.png') }} height="45" alt="SmartFood"
+                loading="lazy" />
+            </a>
+            <!-- Right links -->
+            <ul class="navbar-nav ms-auto d-flex flex-row">
+                <!-- Notification dropdown -->
+                <li class="nav-item dropdown">
+                <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink"
+                    role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Some news</a></li>
+                    <li><a class="dropdown-item" href="#">Another news</a></li>
+                    <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                </ul>
+                </li>
+
+                <!-- Icon dropdown -->
+                <li class="nav-item dropdown">
+                <a class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#" id="navbarDropdown"
+                    role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <i class="united kingdom flag m-0"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li>
+                    <a class="dropdown-item" href="#"><i class="united kingdom flag"></i>English
+                        <i class="fa fa-check text-success ms-2"></i></a>
+                    </li>
+                    <li>
+                    <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                    <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
+                    </li>
+                    <li>
+                    <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
+                    </li>
+                    <li>
+                    <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
+                    </li>
+                    <li>
+                    <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
+                    </li>
+                    <li>
+                    <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
+                    </li>
+                    <li>
+                    <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
+                    </li>
+                    <li>
+                    <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
+                    </li>
+                    <li>
+                    <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
+                    </li>
+                </ul>
+                </li>
+
+                <!-- Avatar -->
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#"
+                    id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" class="rounded-circle"
+                    height="22" alt="Avatar" loading="lazy" />
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">My profile</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+                </li>
+            </ul>
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+        </header>
+        <!--Main Navigation-->
+
+        <!--Main layout-->
+        <main>
+            <div class="container pt-4">
+                {% block body %}{% endblock %}
+            </div>
+        </main>
+        <!--Main layout-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js" integrity="sha512-2bMhOkE/ACz21dJT8zBOMgMecNxx0d37NND803ExktKiKdSzdwn+L7i9fdccw/3V06gM/DBWKbYmQvKMdAA9Nw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+
+    {% block javascript %}
+        <script>
+            $(document).ready(function () {
+                $('.nav-link').click(function () {
+                    $('.nav-link').removeClass('active');
+                    $(this).addClass('active');
+                });
+            });
+        </script>
+    {% endblock %}
     </body>
 </html>

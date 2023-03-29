@@ -43,6 +43,11 @@ class Categories
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getTypeCategory();
+    }
+
     /**
      * @return Collection<int, Products>
      */

@@ -75,6 +75,11 @@ class Products
         return $this;
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
@@ -99,41 +104,14 @@ class Products
         return $this;
     }
 
-    public function getState(): ?string
+    public function isState(): ?bool
     {
         return $this->state;
     }
 
-    public function setState(string $state): self
+    public function setState(bool $state): self
     {
         $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Orders>
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Orders $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders->add($order);
-            $order->addDetail($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Orders $order): self
-    {
-        if ($this->orders->removeElement($order)) {
-            $order->removeDetail($this);
-        }
 
         return $this;
     }

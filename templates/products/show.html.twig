@@ -1,42 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Products{% endblock %}
+{% block title %}Productos{% endblock %}
 
 {% block body %}
-    <h1>Products</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ product.photo }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ product.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ product.description }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
-                <th>State</th>
-                <td>{{ product.state }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_products_index') }}">back to list</a>
-
-    <a href="{{ path('app_products_edit', {'id': product.id}) }}">edit</a>
-
-    {{ include('products/_delete_form.html.twig') }}
+    <div class="content">
+        <div class="actionsForm backBtn">
+            <a href="{{ path('app_products_index') }}" class="btn btn-add"><i class="fa-solid fa-arrow-left me-2"></i> Volver a la lista</a>
+        </div>
+        <h2 class="titleSection"><i class="fa-regular fa-eye me-2"></i>Detalle del Producto</h2>
+        <div class="detailProduct">
+            <div class="imageProduct">
+                <img src={{ asset('uploads/products/' ~ product.photo) }} alt={{ product.name }}>
+            </div>
+            <div class="infoProduct">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <td>{{ product.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre:</th>
+                            <td>{{ product.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Descripción:</th>
+                            <td>{{ product.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Categoria (s):</th>
+                            <td>
+                            {# {{ product.category }} #}Categorias
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Presentación:</th>
+                            <td>
+                            {# {{ product.category }} #}Presentación
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Precio:</th>
+                            <td>{{ product.price }}</td>
+                        </tr>
+                        <tr>
+                            <th>Estado:</th>
+                            <td>{{ product.state ? 'Activo' : 'Inactivo' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="actionsForm">
+                    <a href="{{ path('app_products_edit', {'id': product.id}) }}" class="btn btn-edit"><i class="fa-regular fa-pen-to-square me-2"></i> Editar</a>
+                    {{ include('products/_delete_form.html.twig') }}
+                </div>
+            </div>
+        </div>        
+    </div>
 {% endblock %}
