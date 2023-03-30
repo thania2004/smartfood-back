@@ -12,12 +12,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+
+       
+
             ->add('email', TextType::class, [
                 'label' => false,
                 'attr' => [
@@ -55,7 +59,20 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
+
+
+            ]) 
+            ->add('profileType', ChoiceType::class, [
+            'label' => 'Profile Type',
+            'choices' => [
+                'Admin' => 'admin',
+                'User' => 'user',
+            ],
+            'expanded' => true,
+            'multiple' => false,
+            'required' => true,
+        ])
+        
         ;
     }
 

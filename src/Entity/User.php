@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Entity;
 
 use App\Repository\UserRepository;
@@ -28,6 +27,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+    
+    #[ORM\Column(type: 'string', length: 10)]
+    private ?string $profileType = null;
 
     public function getId(): ?int
     {
@@ -86,6 +88,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+    
+    public function getProfileType(): ?string
+    {
+        return $this->profileType;
+    }
+
+    public function setProfileType(?string $profileType): self
+    {
+        $this->profileType = $profileType;
 
         return $this;
     }
